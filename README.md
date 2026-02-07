@@ -54,4 +54,4 @@ Web Gen is built using a modern Android stack designed for high-performance AI i
 ---
 
 ## 📜 License
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.

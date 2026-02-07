@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConsoleActivity">
+
+    <!-- Header Toolbar for Title and Actions -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Heading -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Code with AIDE"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Action: Save Icon -->
+            <ImageView
+                android:id="@+id/icon_save"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@android:drawable/ic_menu_save"
+                android:contentDescription="Save Code"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <!-- Action: Run Icon -->
+            <ImageView
+                android:id="@+id/icon_run"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@android:drawable/ic_menu_send"
+                android:contentDescription="Run Code"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- The WebView houses the powerful Ace Code Editor -->
+    <WebView
+        android:id="@+id/webview_code_editor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

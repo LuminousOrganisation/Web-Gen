@@ -1,0 +1,35 @@
+<resources>
+	<string name="app_name" translatable="false">Web Gen</string>
+
+	<!-- for public use
+	<string name="adstat">public</string>
+	<string name="AppID" translatable="false">ca-app-pub-2331262735491655~1640393149</string>
+	<string name="banner" translatable="false">ca-app-pub-2331262735491655/4633280196</string>
+	<string name="interstitial" translatable="false">ca-app-pub-2331262735491655/9306311931</string>
+	<string name="rewardedinterstitial" translatable="false">ca-app-pub-2331262735491655/8740046164</string>
+	<string name="rewarded" translatable="false">ca-app-pub-2331262735491655/5004923080</string>
+	<string name="nativead" translatable="false">ca-app-pub-2331262735491655/3691841411</string>
+	-->
+
+	<!-- test ad stack is below-->
+	<!-- for debug use
+	<string name="adstat">org</string>
+	<string name="AppID" translatable="false">ca-app-pub-2331262735491655~1640393149</string>
+	<string name="banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+	<string name="interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+	<string name="rewardedinterstitial" translatable="false">ca-app-pub-3940256099942544/5354046379</string>
+	<string name="rewarded" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+	<string name="nativead" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    -->
+
+	<!-- for organisational use ad free-->
+	<string name="adstat">org</string>
+	<string name="AppID" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+	<string name="banner" translatable="false">c</string>
+	<string name="interstitial" translatable="false">c</string>
+	<string name="rewardedinterstitial" translatable="false">c</string>
+	<string name="rewarded" translatable="false">c</string>
+	<string name="nativead" translatable="false">c</string>
+
+
+</resources>

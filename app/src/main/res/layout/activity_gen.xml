@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GenActivity">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Code with Luminous AI"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" />
+
+    <!-- ViewPager2 for Sliding Cards -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp" />
+
+    <!-- Navigation Area -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btn_prev"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_previous"
+            app:tint="@color/colorPrimary" />
+
+        <!-- Page Indicator (Optional but helpful) -->
+        <TextView
+            android:id="@+id/tv_step_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Step 1 of 5"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_next"
+            app:tint="@color/colorPrimary" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_generate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="GENERATE CODE"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"/>
+</LinearLayout>

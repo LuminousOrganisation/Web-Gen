@@ -1,0 +1,29 @@
+<resources>
+	<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="colorControlHighlight">@color/colorControlHighlight</item>
+		<item name="colorControlNormal">@color/colorControlNormal</item>
+	</style>
+	<style name="AppTheme.FullScreen" parent="AppTheme">
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+	<style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+	</style>
+	<style name="ActionIconStyle">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">32dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:scaleType">centerInside</item>
+		<item name="android:clickable">true</item>
+		<item name="android:focusable">true</item>
+		<item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+
+	</style>
+</resources>

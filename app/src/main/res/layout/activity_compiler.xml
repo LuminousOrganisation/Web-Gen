@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".CompilerActivity">
+
+            <LinearLayout
+                android:id="@+id/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="4dp"
+                android:paddingTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:id="@+id/web_icon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/web_gen_logo"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="Web Icon"/>
+
+                    <TextView
+                        android:id="@+id/web_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Web Project Runtime"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/bannerContainer"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal|center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <WebView
+                    android:id="@+id/runtime_webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"  android:background="#FFFFFF"/>
+
+                <TextView
+                    android:id="@+id/console_header_alias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:gravity="right"
+                    android:text="Console Log 🔽"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+
+                <LinearLayout
+                    android:id="@+id/console_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"  android:orientation="vertical"
+                    android:background="#212121"
+                    android:elevation="8dp"
+                    android:paddingTop="4dp">
+
+                    <ListView
+                        android:id="@+id/console_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#424242"
+                        android:dividerHeight="1dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>

@@ -1,0 +1,24 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/edittext_project_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Project Name (Max 24 chars)"
+        android:maxLength="24"
+        android:inputType="textCapWords"
+        android:autofillHints="name" />
+
+    <Button
+        android:id="@+id/button_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:text="Create" />
+</LinearLayout>

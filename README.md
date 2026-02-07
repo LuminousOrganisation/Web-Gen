@@ -55,11 +55,3 @@ Web Gen is built using a modern Android stack designed for high-performance AI i
 
 ## 📜 License
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🏆 Hackathon Criteria Checklist
-* **Technical Execution (40%):** High-quality Kotlin code with deep Gemini 3 API integration.
-* **Potential Impact (20%):** Democratizing web development for non-coders and rapid prototyping for pros.
-* **Innovation (30%):** Moves beyond "chat" into functional, agent-based code synthesis.
-* **Presentation (10%):** Clean UI and clear documentation.

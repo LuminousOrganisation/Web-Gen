@@ -229,18 +229,6 @@ public class GenActivity extends AppCompatActivity {
         });
     }
 
-//    private void initializeViews() {
-//        inputFields = new HashMap<>();
-//
-//        // Map EditTexts to their corresponding SharedPreferences keys
-//        inputFields.put("title", findViewById(R.id.edit_title));
-//        inputFields.put("html", findViewById(R.id.edit_design)); // 'html' key for Design
-//        inputFields.put("css", findViewById(R.id.edit_animation)); // 'css' key for Animation
-//        inputFields.put("js", findViewById(R.id.edit_functionality)); // 'js' key for Functionality
-//        inputFields.put("special", findViewById(R.id.edit_special)); // 'special' key for Special Instruction
-//
-//    }
-
     private void loadDataFromPrefs() {
         for (Map.Entry<String, EditText> entry : inputFields.entrySet()) {
             String key = entry.getKey();
@@ -288,13 +276,6 @@ public class GenActivity extends AppCompatActivity {
 
     // Ensures all data is saved, especially useful just before exiting or generating
     private void saveAllDataToPrefs() {
-//        SharedPreferences.Editor editor = projectPrefs.edit();
-//        for (Map.Entry<String, EditText> entry : inputFields.entrySet()) {
-//            String key = entry.getKey();
-//            String value = entry.getValue().getText().toString();
-//            editor.putString(key, value);
-//        }
-//        editor.apply();
     }
 
     @SuppressLint("GestureBackNavigation")
@@ -400,168 +381,6 @@ public class GenActivity extends AppCompatActivity {
             });
         });
     }
-
-    /**
-     private void getCodeResponse(String instruction) {
-     final String apiKey = getApiKey();
-
-     if (apiKey.isEmpty()) {
-     // CONVERSION: Replaced lambda with anonymous inner class
-     runOnUiThread(new Runnable() {
-    @Override
-    public void run() {
-    Toast.makeText(GenActivity.this, "Luminous AI Key is missing. Cannot generate code.", Toast.LENGTH_LONG).show();
-    }
-    });
-     return;
-     }
-
-     // Show loading indicator
-     // CONVERSION: Replaced lambda with anonymous inner class
-     runOnUiThread(new Runnable() {
-    @Override
-    public void run() {
-    //Toast.makeText(GenActivity.this, "Starting code generation across models...", Toast.LENGTH_LONG).show();
-    }
-    });
-
-     executorService.execute(new Runnable() {
-    @Override
-    public void run() {
-    String generatedCode = null;
-    String errorMessage = "Failed to generate code after trying all models.";
-    boolean success = false;
-
-    // --- 1. MODEL ITERATION LOOP ---
-    for (String currentModel : GEMINI_MODELS) {
-    if (success) break;
-
-    long delay = 1000; // Initial delay for exponential backoff
-
-    // --- 2. RETRY LOOP (with Exponential Backoff) ---
-    for (int attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    try {
-    String apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/" + currentModel + ":generateContent?key=" + apiKey;
-    URL url = new URL(apiUrl);
-    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-    conn.setRequestMethod("POST");
-    conn.setRequestProperty("Content-Type", "application/json");
-    conn.setDoOutput(true);
-
-    // --- Construct Simple Payload ---
-    JSONObject userPart = new JSONObject();
-    userPart.put("text", instruction);
-
-    JSONObject content = new JSONObject();
-    content.put("parts", new JSONArray().put(userPart));
-    content.put("role", "user");
-
-    JSONObject payload = new JSONObject();
-    payload.put("contents", new JSONArray().put(content));
-    payload.put("systemInstruction", new JSONObject().put("parts", new JSONArray().put(new JSONObject().put("text", "Respond ONLY with the complete, self-contained code block. Do not include markdown or external commentary."))));
-
-
-    try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8")) {
-    writer.write(payload.toString());
-    }
-
-    int responseCode = conn.getResponseCode();
-
-    if (responseCode == HttpURLConnection.HTTP_OK) {
-    try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-    StringBuilder response = new StringBuilder();
-    String inputLine;
-    while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-    }
-    JSONObject jsonResponse = new JSONObject(response.toString());
-
-    if (jsonResponse.has("candidates")) {
-    JSONObject candidate = jsonResponse.getJSONArray("candidates").getJSONObject(0);
-    if (candidate.has("content")) {
-    JSONObject contentObj = candidate.getJSONObject("content");
-    if (contentObj.has("parts")) {
-    JSONObject firstPart = contentObj.getJSONArray("parts").getJSONObject(0);
-    if (firstPart.has("text")) {
-    generatedCode = firstPart.getString("text");
-    success = true;
-    break; // Success! Exit inner retry loop
-    }
-    }
-    }
-    }
-    }
-    } else if (responseCode == 429) { // Throttling
-    if (attempt < MAX_RETRIES - 1) {
-    Thread.sleep(delay);
-    delay *= 2; // Exponential backoff
-    continue; // Continue inner loop
-    } else {
-    // Max retries reached for this model
-    errorMessage = "Model " + currentModel + " failed due to throttling.";
-    break; // Break inner retry loop, continue to next model
-    }
-    } else {
-    // Other non-retriable HTTP error (e.g., 400 Bad Request, 404 Not Found)
-    errorMessage = "Model " + currentModel + " failed with HTTP code: " + responseCode;
-    break; // Break inner retry loop, continue to next model
-    }
-    } catch (Exception e) {
-    e.printStackTrace();
-    // Catch network/parsing errors and retry
-    if (attempt < MAX_RETRIES - 1) {
-    try {
-    Thread.sleep(delay);
-    delay *= 2;
-    continue; // Continue inner loop
-    } catch (InterruptedException ie) {
-    Thread.currentThread().interrupt();
-    break; // Break both loops
-    }
-    } else {
-    errorMessage = "Model " + currentModel + " failed due to error: " + e.getMessage();
-    break; // Break inner retry loop, continue to next model
-    }
-    }
-    } // End of inner retry loop
-    if (success) break; // Break outer model loop on success
-    } // End of outer model loop
-
-    final String finalGeneratedCode = generatedCode;
-    final String finalErrorMessage = errorMessage;
-    // FIX: Make a final copy of the 'success' variable for the inner Runnable
-    final boolean finalSuccess = success;
-
-    // --- UI Update (User-Provided Logic) ---
-    // CONVERSION: Replaced lambda with anonymous inner class
-    runOnUiThread(new Runnable() {
-    @Override
-    public void run() {
-    // Use finalSuccess instead of success
-    Log.e("TAG", "finalSuccess: " + finalSuccess+"\nGenCode:\n"+finalGeneratedCode);
-    if (finalGeneratedCode != null && finalSuccess) {
-    // Check for <html> (case-insensitive)
-    projectPrefs.edit().putString("code", clean(finalGeneratedCode)).apply();
-    Toast.makeText(GenActivity.this, "Code successfully generated and saved!", Toast.LENGTH_LONG).show();
-    if (finalGeneratedCode.toLowerCase().contains("<html>")) {
-    // Save the code to the specific shared preference key "code"
-    } else {
-    // The response didn't look like code
-    //Toast.makeText(GenActivity.this, "AI response was not valid HTML code. Response length: " + finalGeneratedCode.length(), Toast.LENGTH_LONG).show();
-    }
-    } else {
-    Toast.makeText(GenActivity.this, "An internal error is occurred. Cannot generate code.", Toast.LENGTH_LONG).show();
-    }
-    }
-    });
-    // ----------------------------------------
-
-
-
-    }
-    });
-     }
-     **/
 
     private String clean (String old) {
         String now = old;
